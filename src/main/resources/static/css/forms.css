@@ -1,0 +1,158 @@
+/**
+ * FORMS STYLES
+ * ------------------------------------------------
+ *  Common form controls, buttons, inputs and validation styles.
+ */
+
+.form-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.field {
+    display: grid;
+    gap: 6px;
+}
+
+label.required-field::after {
+    content: '*';
+    color: var(--error);
+    margin-left: 1px;
+}
+
+.field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ocean-dark);
+}
+
+.field-wide {
+    width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="datetime-local"],
+textarea,
+select {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    background: var(--white);
+    color: var(--gray-text);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="datetime-local"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--turquoise-main);
+    box-shadow: 0 0 0 3px rgba(43, 169, 154, 0.1);
+}
+
+.btn-primary {
+    padding: 12px 18px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--ocean-main) 0%, var(--turquoise-main) 100%);
+    color: var(--white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(43, 169, 154, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.lang-toggle {
+    min-width: 90px;
+    padding-inline: 16px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+}
+
+.btn-action {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-edit {
+    background: var(--ocean-light);
+    color: var(--white);
+}
+
+.btn-edit:hover {
+    background: var(--ocean-main);
+}
+
+.btn-delete {
+    background: var(--error-background);
+    color: var(--error);
+    border: 1px solid var(--error-border);
+}
+
+.btn-delete:hover {
+    background: var(--error-border);
+}
+
+.btn-secondary {
+    padding: 10px 14px;
+    background: var(--gray-light);
+    border: 1.5px solid var(--border);
+    color: var(--gray-text);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background: var(--white);
+    border-color: var(--ocean-light);
+    color: var(--ocean-dark);
+}
+
+.btn-secondary.active {
+    background: linear-gradient(135deg, var(--ocean-main) 0%, var(--turquoise-main) 100%);
+    border-color: var(--ocean-main);
+    color: var(--white);
+}
+
+.btn-danger {
+    padding: 10px 14px;
+    background: var(--error-background);
+    border: 1.5px solid var(--error-border);
+    color: var(--error);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.btn-danger:hover {
+    background: var(--error);
+    border-color: var(--error);
+    color: var(--white);
+}

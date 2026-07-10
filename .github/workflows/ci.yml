@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      # Run the test suite to verify that the application works correctly.
+      # -B: batch mode (no interactive prompts, cleaner CI logs)
+      - name: Run tests
+        run: mvn -B test
+
+      # Build the application and create the executable .jar file.
+      # Tests are skipped here because they have already been executed above.
+      - name: Package application
+        run: mvn -B package -DskipTests

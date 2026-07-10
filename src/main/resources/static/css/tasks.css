@@ -1,0 +1,298 @@
+/**
+ * TASKS STYLES
+ * ------------------------------------------------
+ * Task list, task cards, filters and task-related UI elements.
+ */
+
+.task-form {
+    display: grid;
+    gap: 12px;
+}
+
+.task-form-toprow {
+    display: grid;
+    grid-template-columns: 2.05fr 1fr 1fr;
+    gap: 10px;
+}
+
+.task-datetime-grid,
+.filter-date-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.task-recurrence-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.task-datetime-grid .field,
+.filter-date-grid .field {
+    background: linear-gradient(180deg, rgba(232, 248, 246, 0.55), rgba(255, 255, 255, 0.95));
+    border: 1px solid rgba(74, 155, 200, 0.12);
+    border-radius: 12px;
+    padding: 10px 12px 8px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    min-width: 0;
+}
+
+.task-datetime-grid label,
+.filter-date-grid label {
+    font-size: 12px;
+}
+
+.task-datetime-grid input,
+.filter-date-grid input {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #ffffff, #f8fcfd);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.task-description {
+    min-height: 60px;
+    max-height: 220px;
+    resize: vertical;
+    width: 100%;
+}
+
+.task-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.task-form-actions button {
+    margin-top: 20px;
+}
+
+#cancelEditBtn {
+    display: none;
+}
+
+.filter-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    flex: 1 1 auto;
+}
+
+.filter-grid .field {
+    width: 100%;
+    max-width: none;
+}
+
+.filter-date-grid {
+    align-items: stretch;
+}
+
+.filter-date-grid .field {
+    padding: 10px 12px 8px;
+    min-width: 0;
+}
+
+.filter-date-grid input {
+    width: 100%;
+}
+
+.filter-actions {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.filter-actions .btn-primary {
+    min-width: 140px;
+}
+
+/*
+ * Table
+ */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 0;
+}
+
+.tasks-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+}
+
+.tasks-table thead {
+    background: linear-gradient(135deg, var(--turquoise-pale) 0%, #f0f8fb 100%);
+    border-bottom: 2px solid var(--turquoise-main);
+}
+
+.tasks-table th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--ocean-dark);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.tasks-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.tasks-table th .sort-indicator {
+    margin-left: 6px;
+    opacity: 0.7;
+}
+
+.tasks-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.tasks-table tbody tr:hover {
+    background: var(--turquoise-pale);
+}
+
+.tasks-table td {
+    padding: 8px 10px;
+    color: var(--gray-text);
+}
+
+.task-title,
+.task-desc {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+.tasks-table th:nth-child(1), .tasks-table td:nth-child(1) {
+    width: 12%;
+}
+
+.tasks-table th:nth-child(2), .tasks-table td:nth-child(2) {
+    width: 20%;
+}
+
+.tasks-table th:nth-child(3), .tasks-table td:nth-child(3) {
+    width: 20%;
+}
+
+.tasks-table th:nth-child(4), .tasks-table td:nth-child(4) {
+    width: 12%;
+}
+
+.tasks-table th:nth-child(5), .tasks-table td:nth-child(5) {
+    width: 12%;
+}
+
+.tasks-table th:nth-child(6), .tasks-table td:nth-child(6) {
+    width: 15%;
+}
+
+.empty-state {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 40px 14px !important;
+}
+
+.priority-high {
+    color: var(--error);
+    font-weight: 600;
+}
+
+.priority-medium {
+    color: var(--priority-medium);
+    font-weight: 600;
+}
+
+.priority-low {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.status-todo {
+    background: var(--error-background);
+    color: var(--error);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-in_progress {
+    background: var(--priority-medium-background);
+    color: var(--priority-medium);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-done {
+    background: var(--success-background);
+    color: var(--success);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.task-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.recurring-badge {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    border-radius: 50%;
+}
+
+.recurring-group td {
+    background: linear-gradient(90deg, rgba(243, 156, 18, 0.03), rgba(243, 156, 18, 0.02));
+}
+
+.tasks-pagination {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination-info {
+    font-weight: 600;
+    color: var(--ocean-dark);
+}
+
+.pagination-ellipsis {
+    padding: 6px 8px;
+    color: var(--gray-text);
+}
+
+.pagination-page {
+    padding: 6px 10px;
+    min-width: 36px;
+}
+
+.pagination-page.active {
+    background: linear-gradient(135deg, var(--ocean-main) 0%, var(--turquoise-main) 100%);
+    color: var(--white);
+    border-color: transparent;
+}

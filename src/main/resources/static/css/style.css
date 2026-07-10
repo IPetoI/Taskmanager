@@ -1,0 +1,24 @@
+/**
+ * Module structure:
+ * - base.css:       Global reset, CSS variables and shared utility styles.
+ * - forms.css:      Common form controls, buttons, inputs and validation styles.
+ * - auth.css:       Login and registration page layout and authentication-specific components.
+ * - layout.css:     Main application layout, navigation, header and shared page structure.
+ * - tasks.css:      Task list, task cards, filters and task-related UI elements.
+ * - calendar.css:   Calendar view, month navigation and date cell styling.
+ * - admin.css:      Administrator dashboard, tables and user management styles.
+ * - responsive.css: Responsive layout adjustments and breakpoint-specific overrides.
+ *
+ * Entry point: contains only imports. Actual styles are defined
+ * in the thematic files. Import order matters due to CSS cascade,
+ * responsive.css is always loaded last to override previous rules.
+ */
+
+@import url('base.css');
+@import url('forms.css');
+@import url('auth.css');
+@import url('layout.css');
+@import url('tasks.css');
+@import url('calendar.css');
+@import url('admin.css');
+@import url('responsive.css');

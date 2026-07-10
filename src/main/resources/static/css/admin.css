@@ -1,0 +1,107 @@
+/**
+ * ADMIN STYLES
+ * ------------------------------------------------
+ * Administrator dashboard, tables and user management styles.
+ */
+
+.admin-card {
+    margin-top: 20px;
+}
+
+.admin-edit-card {
+    margin-top: 20px;
+    border: 1.5px solid var(--turquoise-main);
+}
+
+.admin-row-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#adminEditUserFields,
+#adminEditTaskFields {
+    display: grid;
+    gap: 12px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.admin-switch {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: end;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.admin-search {
+    flex: 1;
+    min-width: min(100%, 420px);
+}
+
+.admin-search input[type="search"] {
+    width: 100%;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.admin-table thead {
+    background: linear-gradient(135deg, var(--turquoise-pale), #f8fdff);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+    word-break: break-word;
+}
+
+.admin-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.admin-table th .sort-indicator {
+    margin-left: 6px;
+    opacity: 0.7;
+}
+
+.admin-table tbody tr:hover {
+    background: rgba(27, 123, 165, 0.05);
+}
+
+@keyframes admin-row-flash {
+    0%   { background: rgba(43, 169, 154, 0.25); }
+    100% { background: transparent; }
+}
+
+.admin-row-highlight {
+    animation: admin-row-flash 3s ease-out forwards;
+}
+
+.admin-table .empty-state {
+    text-align: center;
+    color: var(--gray-text);
+    padding: 22px 12px;
+}

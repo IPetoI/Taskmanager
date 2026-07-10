@@ -1,0 +1,99 @@
+/**
+ * RESPONSIVE STYLES
+ * ------------------------------------------------
+ * Responsive layout adjustments and breakpoint-specific overrides.
+ */
+
+@media (max-width: 768px) {
+    .controls-section {
+        grid-template-columns: 1fr;
+    }
+
+    .task-form {
+        grid-template-columns: 1fr;
+    }
+
+    .task-form-toprow {
+        grid-template-columns: 1fr;
+    }
+
+    .task-datetime-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-date-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-actions {
+        width: 100%;
+    }
+
+    .app-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .header-right {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tasks-table {
+        font-size: 12px;
+        table-layout: auto;
+    }
+
+    .tasks-table th,
+    .tasks-table td {
+        padding: 10px;
+    }
+
+    .calendar-table {
+        min-width: 760px;
+    }
+
+    .calendar-toolbar {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .app-container {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .card-topbar {
+        margin-bottom: 10px;
+    }
+
+    .lang-toggle {
+        min-width: 78px;
+        padding-inline: 12px;
+    }
+
+    .task-form-actions {
+        justify-content: stretch;
+    }
+
+    .task-form-actions button {
+        width: 100%;
+    }
+
+    .filter-actions .btn-primary {
+        width: 100%;
+    }
+}
