@@ -56,7 +56,8 @@ class JwtTokenProviderTest {
     @Test
     void validateTokenShouldReturnFalseForTamperedToken() {
         String token = tokenProvider.createToken("peto");
-        String tampered = token.substring(0, token.length() - 1) + "X";
+        String[] parts = token.split("\\.");
+        String tampered = parts[0] + "." + parts[1] + ".invalidSignature";
         assertFalse(tokenProvider.validateToken(tampered));
     }
 

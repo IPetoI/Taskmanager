@@ -99,7 +99,7 @@ The project was created as a portfolio application to demonstrate practical back
 - MySQL 8
 - Maven (or use the included Maven Wrapper)
 
-## Docker
+## Docker deployment
 
 - Docker
 - Docker Compose
@@ -579,7 +579,7 @@ Features not yet implemented — will be moved to the features list above once d
 ## Planned features
 
 - [ ] Task management improvements (recurring tasks, deleting old tasks, sorting)
-- [ ] User account improvements (profile management, validation, password policy)
+- [X] User account improvements (profile management, validation, password policy)
 - [ ] UI/UX improvements (dark mode, calendar refinements)
 
 ## Planned infrastructure improvements

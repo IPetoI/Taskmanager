@@ -21,10 +21,6 @@
         grid-template-columns: 1fr;
     }
 
-    .filter-date-grid {
-        grid-template-columns: 1fr;
-    }
-
     .filter-grid {
         grid-template-columns: 1fr;
     }
@@ -56,6 +52,28 @@
 
     .calendar-table {
         min-width: 760px;
+    }
+
+    .calendar-toolbar-nav {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "prev next"
+            "range range";
+        row-gap: 12px;
+    }
+
+    #calendarPrevBtn {
+        grid-area: prev;
+    }
+
+    #calendarNextBtn {
+        grid-area: next;
+    }
+
+    .calendar-range {
+        grid-area: range;
+        text-align: center;
+        justify-self: center;
     }
 
     .calendar-toolbar {

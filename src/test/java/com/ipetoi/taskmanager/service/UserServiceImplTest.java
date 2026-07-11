@@ -237,4 +237,5 @@ class UserServiceImplTest {
 
         verify(userRepository, never()).delete(any(User.class));
     }
+
 }

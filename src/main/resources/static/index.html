@@ -57,6 +57,7 @@
                                data-i18n="auth.username">Felhasználónév</label>
                         <input id="registerUsername" name="username" type="text" autocomplete="username"
                                data-i18n-placeholder="auth.username" placeholder="Felhasználónév" required>
+                        <small class="field-hint" data-i18n="auth.usernameHint">3–30 karakter</small>
                     </div>
                     <div class="field">
                         <label for="registerEmail" class="required-field" data-i18n="auth.email">Email</label>
@@ -67,6 +68,21 @@
                         <label for="registerPassword" class="required-field" data-i18n="auth.password">Jelszó</label>
                         <input id="registerPassword" name="password" type="password" autocomplete="new-password"
                                data-i18n-placeholder="auth.password" placeholder="Jelszó" required>
+                        <div id="passwordStrength" class="password-strength hidden">
+                            <div class="strength-bar">
+                                <div id="strengthFill" class="strength-fill"></div>
+                            </div>
+                            <ul id="passwordRules" class="password-rules"></ul>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="registerConfirmPassword" class="required-field" data-i18n="auth.confirmPassword">Jelszó
+                            megerősítése</label>
+                        <input id="registerConfirmPassword" name="confirmPassword" type="password"
+                               autocomplete="new-password"
+                               data-i18n-placeholder="auth.confirmPassword" placeholder="Jelszó megerősítése" required>
+                        <small id="confirmPasswordHint" class="field-hint hidden error-text"
+                               data-i18n="auth.passwordMismatch">A két jelszó nem egyezik.</small>
                     </div>
                     <button type="submit" class="btn-primary" data-i18n="auth.registerBtn">Regisztráció</button>
                 </form>
@@ -204,39 +220,6 @@
             </div>
         </div>
 
-        <div id="adminCard" class="card admin-card hidden">
-            <div class="admin-header">
-                <h3 data-i18n="admin.heading">Admin felület</h3>
-                <div class="admin-switch">
-                    <button id="adminUsersBtn" type="button" class="btn-secondary" data-i18n="admin.usersView">
-                        Felhasználók
-                    </button>
-                    <button id="adminTasksBtn" type="button" class="btn-secondary" data-i18n="admin.tasksView">Task-ok
-                    </button>
-                </div>
-            </div>
-            <div class="admin-toolbar">
-                <div class="field admin-search">
-                    <label for="adminSearch" data-i18n="admin.searchLabel">Keresés</label>
-                    <input id="adminSearch" type="search" data-i18n-placeholder="admin.searchPlaceholder"
-                           placeholder="Keresés név, email vagy bármi alapján">
-                </div>
-                <button id="adminRefreshBtn" type="button" class="btn-primary" data-i18n="admin.refresh">Frissítés
-                </button>
-            </div>
-            <div class="table-wrapper">
-                <table id="adminTable" class="admin-table">
-                    <thead id="adminTableHead"></thead>
-                    <tbody id="adminTableBody">
-                    <tr>
-                        <td colspan="6" class="empty-state" data-i18n="admin.usersEmpty">Nincsenek felhasználók.</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="adminPagination" class="tasks-pagination"></div>
-        </div>
-
         <div id="adminEditCard" class="card admin-edit-card hidden">
             <h3 id="adminEditHeading">Felhasználó szerkesztése</h3>
             <form id="adminEditForm" class="form-grid" novalidate>
@@ -306,6 +289,39 @@
                     </button>
                 </div>
             </form>
+        </div>
+
+        <div id="adminCard" class="card admin-card hidden">
+            <div class="admin-header">
+                <h3 data-i18n="admin.heading">Admin felület</h3>
+                <div class="admin-switch">
+                    <button id="adminUsersBtn" type="button" class="btn-secondary" data-i18n="admin.usersView">
+                        Felhasználók
+                    </button>
+                    <button id="adminTasksBtn" type="button" class="btn-secondary" data-i18n="admin.tasksView">Task-ok
+                    </button>
+                </div>
+            </div>
+            <div class="admin-toolbar">
+                <div class="field admin-search">
+                    <label for="adminSearch" data-i18n="admin.searchLabel">Keresés</label>
+                    <input id="adminSearch" type="search" data-i18n-placeholder="admin.searchPlaceholder"
+                           placeholder="Keresés név, email vagy bármi alapján">
+                </div>
+                <button id="adminRefreshBtn" type="button" class="btn-primary" data-i18n="admin.refresh">Frissítés
+                </button>
+            </div>
+            <div class="table-wrapper">
+                <table id="adminTable" class="admin-table">
+                    <thead id="adminTableHead"></thead>
+                    <tbody id="adminTableBody">
+                    <tr>
+                        <td colspan="6" class="empty-state" data-i18n="admin.usersEmpty">Nincsenek felhasználók.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="adminPagination" class="tasks-pagination"></div>
         </div>
 
         <div id="tasksListCard" class="card">

@@ -2,8 +2,8 @@ import {applyTranslations, showLoginPage, showAppPage, resetTaskDefaults, resetF
 import {renderCalendar, setCalendarView, navigateCalendar, goToToday} from './calendar.js';
 import {state, clearAuth, clearLanguage, persistLanguage} from './state.js';
 import {renderTasksTable, loadTasks, saveTask, initTaskEvents} from './tasks.js';
-import {loginUser, registerUser, logout} from './auth.js';
-import {renderAdminTable, loadAdminData, setAdminView, setAdminSearch, submitEditForm, closeEditCard, initAdminEvents, changeAdminPage} from './admin.js';
+import {loginUser, registerUser, logout, onPasswordInput, onConfirmPasswordInput} from './auth.js';
+import {renderAdminTable, loadAdminData, setAdminView, setAdminSearch, submitEditForm, closeEditCard, initAdminEvents} from './admin.js';
 import {el, toDatetimeLocal} from './utils.js';
 
 
@@ -50,6 +50,8 @@ function bindEvents() {
     el('loginForm').addEventListener('submit', loginUser);
     el('showRegisterLink').addEventListener('click', toggleAuthForm);
     el('registerForm').addEventListener('submit', registerUser);
+    el('registerPassword').addEventListener('input', onPasswordInput);
+    el('registerConfirmPassword').addEventListener('input', onConfirmPasswordInput);
     el('showLoginLink').addEventListener('click', toggleAuthForm);
     el('logoutBtn').addEventListener('click', logout);
     el('loginLangBtn')

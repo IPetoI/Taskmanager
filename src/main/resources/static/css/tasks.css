@@ -15,8 +15,7 @@
     gap: 10px;
 }
 
-.task-datetime-grid,
-.filter-date-grid {
+.task-datetime-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
@@ -90,7 +89,11 @@
 }
 
 .filter-date-grid {
+    display: grid;
     align-items: stretch;
+    grid-template-columns: 1fr;
+    gap: 26px;
+    width: 100%;
 }
 
 .filter-date-grid .field {

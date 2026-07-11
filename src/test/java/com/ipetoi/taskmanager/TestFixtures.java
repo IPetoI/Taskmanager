@@ -24,7 +24,7 @@ public final class TestFixtures {
         u.setId(id);
         u.setUsername(username);
         u.setEmail(email);
-        u.setPassword("hashed");
+        u.setPassword("Hashed123.");
         u.setRole(UserRole.USER);
         return u;
     }
@@ -34,7 +34,7 @@ public final class TestFixtures {
         u.setId(id);
         u.setUsername("admin");
         u.setEmail("petoojozsef@gmail.com");
-        u.setPassword("hashed-admin");
+        u.setPassword("Hashed-admin1");
         u.setRole(UserRole.ADMIN);
         return u;
     }

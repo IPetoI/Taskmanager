@@ -25,12 +25,24 @@
     flex-wrap: wrap;
 }
 
-.calendar-toolbar-nav,
 .calendar-toolbar-actions {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+}
+
+.calendar-toolbar-nav {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr) 140px;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+#calendarPrevBtn,
+#calendarNextBtn {
+    width: 100%;
 }
 
 .calendar-toolbar-actions {
@@ -44,6 +56,7 @@
 }
 
 .calendar-range {
+    justify-self: center;
     text-align: center;
     font-weight: 700;
     color: var(--ocean-dark);
@@ -102,7 +115,8 @@
     font-weight: 700;
     color: var(--ocean-dark);
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .calendar-day-head {

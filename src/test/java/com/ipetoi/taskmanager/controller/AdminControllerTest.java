@@ -93,13 +93,14 @@ class AdminControllerTest {
         updated.setId(1L);
         updated.setUsername("peto2");
         updated.setEmail("peto2@example.com");
+        updated.setPassword("Longpassword2.");
 
-        when(userService.updateUser(eq(1L), eq("peto2"), eq("peto2@example.com"), eq("")))
+        when(userService.updateUser(eq(1L), eq("peto2"), eq("peto2@example.com"), eq("Longpassword2.")))
                 .thenReturn(updated);
 
         mockMvc.perform(put("/api/admin/users/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"username\":\"peto2\",\"email\":\"peto2@example.com\",\"password\":\"\"}")
+                        .content("{\"username\":\"peto2\",\"email\":\"peto2@example.com\",\"password\":\"Longpassword2.\"}")
                         .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("peto2"))

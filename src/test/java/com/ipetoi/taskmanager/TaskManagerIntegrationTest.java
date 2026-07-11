@@ -51,6 +51,7 @@ class TaskManagerIntegrationTest {
         Map<String, String> body = Map.of(
                 "username", username,
                 "password", password,
+                "confirmPassword", password,
                 "email", email
         );
 
@@ -100,8 +101,8 @@ class TaskManagerIntegrationTest {
 
     @Test
     void fullLifecycleShouldWork() throws Exception {
-        registerUser("peto", "Jelszo123", "peto@example.com");
-        String token = loginAndGetToken("peto", "Jelszo123");
+        registerUser("peto", "Jelszo123.", "peto@example.com");
+        String token = loginAndGetToken("peto", "Jelszo123.");
 
         Long taskId = createTaskAndGetId(token, "Integrációs teszt feladat");
 
@@ -142,11 +143,11 @@ class TaskManagerIntegrationTest {
 
     @Test
     void idor_PetoShouldNotSeeQwetasks() throws Exception {
-        registerUser("peto", "Jelszo123", "peto@example.com");
-        registerUser("qwe", "qwe", "qwe@example.com");
+        registerUser("peto", "Jelszo123.", "peto@example.com");
+        registerUser("qwe", "Qwe12345.", "qwe@example.com");
 
-        String petoToken = loginAndGetToken("peto", "Jelszo123");
-        String qweToken = loginAndGetToken("qwe", "qwe");
+        String petoToken = loginAndGetToken("peto", "Jelszo123.");
+        String qweToken = loginAndGetToken("qwe", "Qwe12345.");
 
         createTaskAndGetId(petoToken, "Peto privát feladata");
 
@@ -158,11 +159,11 @@ class TaskManagerIntegrationTest {
 
     @Test
     void idor_QweShouldNotDeletePetoTask() throws Exception {
-        registerUser("peto", "Jelszo123", "peto@example.com");
-        registerUser("qwe", "qwe", "qwe@example.com");
+        registerUser("peto", "Jelszo123.", "peto@example.com");
+        registerUser("qwe", "Qwe12345.", "qwe@example.com");
 
-        String petoToken = loginAndGetToken("peto", "Jelszo123");
-        String qweToken = loginAndGetToken("qwe", "qwe");
+        String petoToken = loginAndGetToken("peto", "Jelszo123.");
+        String qweToken = loginAndGetToken("qwe", "Qwe12345.");
 
         Long PetoTaskId = createTaskAndGetId(petoToken, "Peto feladata");
 
@@ -180,11 +181,11 @@ class TaskManagerIntegrationTest {
 
     @Test
     void idor_QweShouldNotUpdatePetoTask() throws Exception {
-        registerUser("peto", "Jelszo123", "peto@example.com");
-        registerUser("qwe", "qwe", "qwe@example.com");
+        registerUser("peto", "Jelszo123.", "peto@example.com");
+        registerUser("qwe", "Qwe12345.", "qwe@example.com");
 
-        String petoToken = loginAndGetToken("peto", "Jelszo123");
-        String qweToken = loginAndGetToken("qwe", "qwe");
+        String petoToken = loginAndGetToken("peto", "Jelszo123.");
+        String qweToken = loginAndGetToken("qwe", "Qwe12345.");
 
         Long PetoTaskId = createTaskAndGetId(petoToken, "Peto feladata");
 
@@ -228,8 +229,8 @@ class TaskManagerIntegrationTest {
 
     @Test
     void getTasks_withStatusFilter_returnsOnlyMatchingTasks() throws Exception {
-        registerUser("peto", "Jelszo123", "peto@example.com");
-        String token = loginAndGetToken("peto", "Jelszo123");
+        registerUser("peto", "Jelszo123.", "peto@example.com");
+        String token = loginAndGetToken("peto", "Jelszo123.");
 
         CreateTaskRequest todoReq = new CreateTaskRequest();
         todoReq.setTitle("TODO feladat");
@@ -259,5 +260,23 @@ class TaskManagerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].title").value("TODO feladat"));
+    }
+
+    // --- Password test ---
+
+    @Test
+    void registerShouldFailWhenPasswordsDoNotMatch() throws Exception {
+        Map<String, String> body = Map.of(
+                "username", "peto",
+                "password", "Jelszo123.",
+                "confirmPassword", "Masik123.",
+                "email", "peto@example.com"
+        );
+
+        mockMvc.perform(post("/api/auth/register")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(body)))
+                .andExpect(status().isBadRequest());
     }
 }

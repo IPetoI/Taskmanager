@@ -40,13 +40,16 @@ class AuthControllerTest {
 
     private User sampleUser;
 
-    private String registerJson(String username, String password, String email) {
+    private String registerJson(String username, String password, String confirmPassword, String email) {
         ObjectNode body = objectMapper.createObjectNode();
         if (username != null) {
             body.put("username", username);
         }
         if (password != null) {
             body.put("password", password);
+        }
+        if (confirmPassword != null) {
+            body.put("confirmPassword", confirmPassword);
         }
         if (email != null) {
             body.put("email", email);
@@ -67,13 +70,13 @@ class AuthControllerTest {
 
     @Test
     void registerShouldReturn201WithValidData() throws Exception {
-        when(userService.createUser("peto", "jelszo123", "peto@example.com"))
+        when(userService.createUser("peto", "Jelszo123.", "peto@example.com"))
                 .thenReturn(sampleUser);
 
         mockMvc.perform(post("/api/auth/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(registerJson("peto", "jelszo123", "peto@example.com")))
+                        .content(registerJson("peto", "Jelszo123.", "Jelszo123.", "peto@example.com")))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.username").value("peto"))
                 .andExpect(jsonPath("$.email").value("peto@example.com"))
@@ -89,7 +92,7 @@ class AuthControllerTest {
         mockMvc.perform(post("/api/auth/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(registerJson("peto", "jelszo123", "peto@example.com")))
+                        .content(registerJson("peto", "Jelszo123.", "Jelszo123.", "peto@example.com")))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status").value(409))
                 .andExpect(jsonPath("$.message").value("Username already exists: peto"));
@@ -103,7 +106,7 @@ class AuthControllerTest {
         mockMvc.perform(post("/api/auth/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(registerJson("peto", "jelszo123", "peto@example.com")))
+                        .content(registerJson("peto", "Jelszo123.","Jelszo123.",  "peto@example.com")))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status").value(409))
                 .andExpect(jsonPath("$.message").value("Email already exists: peto@example.com"));
@@ -114,7 +117,7 @@ class AuthControllerTest {
         mockMvc.perform(post("/api/auth/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(registerJson(null, "jelszo123", "peto@example.com")))
+                        .content(registerJson(null, "jelszo123","Jelszo123.",  "peto@example.com")))
                 .andExpect(status().isBadRequest());
 
         verifyNoInteractions(userService);
@@ -125,7 +128,7 @@ class AuthControllerTest {
         mockMvc.perform(post("/api/auth/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(registerJson("peto", "jelszo123", "ez-nem-email")))
+                        .content(registerJson("peto", "jelszo123","Jelszo123.",  "ez-nem-email")))
                 .andExpect(status().isBadRequest());
 
         verifyNoInteractions(userService);
@@ -180,6 +183,22 @@ class AuthControllerTest {
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(req)))
+                .andExpect(status().isBadRequest());
+
+        verifyNoInteractions(userService);
+    }
+
+    @Test
+    void registerShouldReturn400WhenPasswordIsTooWeak() throws Exception {
+        mockMvc.perform(post("/api/auth/register")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(registerJson(
+                                "peto",
+                                "jelszo123",       // too weak password
+                                "jelszo123",
+                                "peto@example.com"
+                        )))
                 .andExpect(status().isBadRequest());
 
         verifyNoInteractions(userService);
