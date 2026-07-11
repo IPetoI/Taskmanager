@@ -6,6 +6,19 @@
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
 ![JWT](https://img.shields.io/badge/Auth-JWT-orange)
 
+## Live Demo
+
+The application is deployed and available here:
+
+🔗 https://taskmanager-45b5.onrender.com/
+
+The deployed version uses:
+
+- **Backend:** Spring Boot application running on Render
+- **Database:** MySQL hosted on Aiven
+- **Deployment:** Docker container
+- **Frontend:** Served directly by Spring Boot from static resources
+
 A full-stack task management web application built with **Spring Boot** and **Vanilla JavaScript**.
 
 The project was created as a portfolio application to demonstrate practical backend development with modern Spring technologies, REST APIs, authentication, testing, Docker, and clean project architecture.
@@ -204,14 +217,15 @@ http://localhost:8080
 
 # Configuration
 
-The application uses **Spring Profiles** to separate local development and Docker environments.
+The application uses **Spring Profiles** to separate different environments.
 
 | Profile | Purpose |
 |---------|---------|
-| `local` | Run the application against a locally installed MySQL server |
-| `docker` | Run inside Docker Compose |
+| `local` | Local development with a locally installed MySQL server |
+| `docker` | Running with Docker Compose and a local MySQL container |
+| `prod` | Production deployment with external MySQL database |
 
-The active profile is selected using
+The active profile is selected using:
 
 ```properties
 SPRING_PROFILES_ACTIVE
@@ -223,19 +237,28 @@ If no profile is specified, the application uses the **local** profile by defaul
 
 # Environment Variables
 
-The project expects a `.env` file (see `.env.example`).
+The application uses environment variables for database credentials and security configuration.
 
-Example:
+For local development these values can be provided through a `.env` file.
+
+For production deployment, the variables are configured directly in the hosting provider environment settings.
+
+Required variables:
 
 ```env
-DB_USER=root
-DB_PASS=your_password
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASS=
 
-JWT_SECRET=your_secret_key_at_least_32_characters
-JWT_EXPIRATION=86400000
+JWT_SECRET=
+JWT_EXPIRATION=
+
+SPRING_PROFILES_ACTIVE=prod
 ```
 
-These values are automatically imported by Spring Boot during startup.
+Sensitive values such as database credentials and JWT secrets are never committed to the repository.
 
 ---
 
@@ -386,7 +409,8 @@ src/
 │       │   └── js/          # ES modules
 │       ├── application.properties
 │       ├── application-local.properties
-│       └── application-docker.properties
+│       ├── application-docker.properties
+│       └── application-prod.properties
 └── test/
     └── java/com/ipetoi/taskmanager/
         ├── controller/      # @WebMvcTest controller tests
@@ -567,6 +591,8 @@ During development I focused on:
 - Managing multiple environments using Spring Profiles
 - Containerizing the application with Docker and Docker Compose
 - Building an automated CI pipeline with GitHub Actions
+- Deploying a Spring Boot application to Render
+- Configuring a managed MySQL database (Aiven)
 
 The project intentionally avoids frontend frameworks to place greater emphasis on backend architecture and business logic.
 
@@ -586,6 +612,7 @@ Features not yet implemented — will be moved to the features list above once d
 
 - [x] Docker + Docker Compose setup
 - [x] CI pipeline (GitHub Actions)
+- [x] Production deployment
 - [ ] CD deployment pipeline
 - [ ] Flyway database migrations
 
